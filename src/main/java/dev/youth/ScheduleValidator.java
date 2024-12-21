@@ -1,0 +1,2 @@
+package dev.youth;import java.util.*;
+public final class ScheduleValidator {public List<String> conflicts(Scheduler.Plan p){var issues=new ArrayList<String>();var a=p.assignments();for(int i=0;i<a.size();i++)for(int j=i+1;j<a.size();j++)if(a.get(i).volunteer().equals(a.get(j).volunteer())&&a.get(i).start().isBefore(a.get(j).end())&&a.get(j).start().isBefore(a.get(i).end()))issues.add(a.get(i).request()+" overlaps "+a.get(j).request());return issues;}}

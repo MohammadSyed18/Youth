@@ -1,0 +1,2 @@
+package dev.youth;import java.time.*;import java.util.*;
+public record PlanMetrics(int assigned,int unassigned,long scheduledMinutes,Map<String,Long> minutesByVolunteer){public static PlanMetrics from(Scheduler.Plan p){var by=new TreeMap<String,Long>();long total=0;for(var a:p.assignments()){long m=Duration.between(a.start(),a.end()).toMinutes();total+=m;by.merge(a.volunteer(),m,Long::sum);}return new PlanMetrics(p.assignments().size(),p.unassigned().size(),total,Map.copyOf(by));}}
